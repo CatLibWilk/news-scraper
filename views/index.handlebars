@@ -1,11 +1,20 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">News Scrape</h1>
-    <p class="lead">The Scraper of News.</p>
+    <h1 class="display-4">Movie Scrape</h1>
+    <p class="lead">The Scraper of Movies.</p>
   </div>
 </div>
 <div class="row">
-  <div class="col-10 mx-auto bg-light pd-3">
+  <div id="articles-div" class="col-10 mx-auto bg-light p-3">
+
+    {{#each article}}
+      <div class="movie-div bg-white p-2 mb-2">
+          <h2>{{headline}}</h2>
+          <p>{{summary}}</p>
+          <p>{{url}}</p>
+          <button id="comment-btn" class="btn btn-warning resend" data-id={{_id}}>comment</button>
+      </div>
+    {{/each }}
 
   </div>
 </div>

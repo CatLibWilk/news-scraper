@@ -5,9 +5,9 @@ var cheerio = require("cheerio");
 
 var router = express.Router();
 
-router.get("/", (req, res) => {
-    res.render("index")
-});
+// router.get("/", (req, res) => {
+//     res.render("index")
+// });
 
 router.get("/scrape", (req, res) => {
     // First, we grab the body of the html with request
@@ -47,6 +47,13 @@ router.get("/scrape", (req, res) => {
       res.send("Scrape Complete");
     });
   });
+
+router.get("/", (req, res) => {
+  db.Article.find({}).then(result => {
+    console.log(result)
+    res.render("index", {article: result});
+  });
+});
 
 
 
