@@ -10,7 +10,11 @@ var router = express.Router();
 // });
 
 router.get("/scrape", (req, res) => {
+    console.log("scraping");
     // First, we grab the body of the html with request
+    db.Article.remove({}).then((err, data) => {
+      console.log("cleared");
+    })
     request.get("https://lightboxfilmcenter.org/programs/", function(error, response, html) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(html);
@@ -31,7 +35,6 @@ router.get("/scrape", (req, res) => {
           .find("a.c-link--navigate-primary")
           .attr("href");
   
-        // Create a new Article using the `result` object built from scraping
         db.Article.create(result)
           .then(function(dbArticle) {
             // View the added result in the console
