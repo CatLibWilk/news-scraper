@@ -1,23 +1,32 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Movie Scrape</h1>
-    <p class="lead">The Scraper of Movies.</p>
+    <h1 class="display-4">Lightbox Heads</h1>
+    <p class="lead">Where people talk Lightbox Film Center Movies.</p>
   </div>
 </div>
 <div class="row">
-  <div class="col">
-    <button class="col-6 mx-auto btn btn-primary scrape-btn">Get a List of Movies</button>
+  <div class="col-8 mx-auto mb-3">
+    <button class="col btn btn-primary scrape-btn">Get a List of Movies</button>
   </div>
 </div>
 <div class="row">
-  <div id="articles-div" class="col-10 mx-auto bg-light p-3">
+  <div id="articles-div" class="col-10 mx-auto bg-light p-3 mb-4">
 
     {{#each article}}
       <div class="movie-div bg-white p-2 mb-2">
           <h2>{{headline}}</h2>
           <p>{{summary}}</p>
           <p>{{url}}</p>
-          <button id="comment-btn" class="btn btn-warning resend" data-id={{_id}}>comment</button>
+          <button class="btn btn-warning comment-btn" data-id={{_id}}>comment</button>
+          {{!-- {{#if article.comment}} --}}
+          
+          {{#each comment}}
+            <div class="comment-div bg-danger">
+                <h3>{{title}}</h3>
+                <p>{{body}}</p>
+            </div>
+          {{/each}}
+          {{!-- {{/if}} --}}
       </div>
     {{/each }}
 
@@ -37,7 +46,7 @@
         <input type="text" class="form-control" id="commentInput" placeholder="Comment">
       </div>
       
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button id="sub-btn" type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </div>

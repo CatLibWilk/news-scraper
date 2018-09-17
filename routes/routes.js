@@ -2,12 +2,11 @@ var express = require("express");
 var db = require("../models");
 var request = require("request");
 var cheerio = require("cheerio");
+var bodyParser = require("body-parser");
 
 var router = express.Router();
-
-// router.get("/", (req, res) => {
-//     res.render("index")
-// });
+// Use body-parser for handling form submissions
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get("/scrape", (req, res) => {
     console.log("scraping");
@@ -52,10 +51,34 @@ router.get("/scrape", (req, res) => {
   });
 
 router.get("/", (req, res) => {
-  db.Article.find({}).then(result => {
+  db.Article.find({})
+  .populate("comment")
+  .then(result => {
     console.log(result)
     res.render("index", {article: result});
   });
+});
+
+router.post("/articles/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  console.log('notes function called')  
+  console.log(req.params.id)
+  console.log(req.body)
+  db.Comment.create(req.body)
+    .then(function(dbComment) {
+      // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
+      // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
+      // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, {$push: {comment: dbComment._id}}, { new: true });
+    })
+    .then(function(dbArticle) {
+      // If we were able to successfully update an Article, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
 
 

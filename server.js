@@ -18,9 +18,6 @@ var routes = require("./routes/routes.js");
 app.use(routes);
 // Configure middleware
 
-// Use morgan logger for logging requests
-// Use body-parser for handling form submissions
-app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
