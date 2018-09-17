@@ -11,9 +11,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.get("/scrape", (req, res) => {
     console.log("scraping");
     // First, we grab the body of the html with request
-    db.Article.remove({}).then((err, data) => {
-      console.log("cleared");
-    })
+    db.Article.remove({}).then((err, data) => { if(err) throw err; console.log("cleared"); });
+    db.Comment.remove({}).then((err, data) => { if(err) throw err; console.log("comments collection cleared"); });
+
     request.get("https://lightboxfilmcenter.org/programs/", function(error, response, html) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(html);
@@ -81,6 +81,13 @@ router.post("/articles/:id", function(req, res) {
     });
 });
 
-
+router.delete("/comment/:id", function(req, res) {
+  db.Comment.deleteOne(
+      {_id: req.params.id}
+    ).then(function(result){
+    res.json(result)
+    });
+}
+);
 
 module.exports = router;

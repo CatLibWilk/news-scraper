@@ -16,6 +16,7 @@ $(document).on("click",".scrape-btn", (e) => {
 
 $(document).on("click", ".comment-btn", function(e){
     var targetId = $(this).attr("data-id");
+    $("#commentForm").removeClass("d-none");
     console.log(targetId);
 
     $("#sub-btn").on("click", function(e){
@@ -31,7 +32,7 @@ $(document).on("click", ".comment-btn", function(e){
                 }
               }).then((result => {
                   console.log(result)
-                //   location.reload();
+                  location.reload();
               }));
 
         }else{
@@ -39,4 +40,19 @@ $(document).on("click", ".comment-btn", function(e){
         };
 
     });
+});
+
+$(document).on("click", ".delete-comment", function(e){
+    var target = $(this).attr("data-id");
+    
+    $.ajax({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        type: "DELETE",
+        url: "/comment/" + target,
+    }).then((result) => {
+        console.log(result);
+        location.reload();
+    })
 });

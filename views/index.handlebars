@@ -21,9 +21,12 @@
           {{!-- {{#if article.comment}} --}}
           
           {{#each comment}}
-            <div class="comment-div bg-danger">
-                <h3>{{title}}</h3>
-                <p>{{body}}</p>
+            <div class="comment-div bg-danger p-2 mt-2 mb-2">
+
+                  <h3 class="border-bottom">{{title}}</h3>
+                  <p>{{body}}</p>
+
+                <button class="btn btn-danger delete-comment ml-auto" data-id={{_id}}>Delete</button>
             </div>
           {{/each}}
           {{!-- {{/if}} --}}
@@ -34,7 +37,7 @@
 </div>
 
 <div class="row">
-  <div class="col-8 mx-auto bg-light pd-3">
+  <div id="commentForm" class="col-8 mx-auto bg-light pd-3 d-none">
     <form>
       <div class="form-group">
         <label for="noteInput">Note Title</label>
