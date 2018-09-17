@@ -85,9 +85,24 @@ router.delete("/comment/:id", function(req, res) {
   db.Comment.deleteOne(
       {_id: req.params.id}
     ).then(function(result){
-    res.json(result)
+      console.log(req.params.id)
+      ///this part doesnt work. 
+      // the query db.articles.find({"comment": {"$elemMatch":{"$in":[ObjectId("5b9ff4f8eec83070bfc6f267")]}}}) 
+      // will target the right movie, but I cant figure out how to remove the right comment
+      return db.Article.updateOne(
+        {
+        }, 
+        {$pull: 
+          {"comment": 
+            {
+              _id: req.params.id
+            }
+          }
+        })
+    }).then(function(updateResult){
+      console.log(updateResult);
+      res.json(updateResult);
     });
-}
-);
+});
 
 module.exports = router;
