@@ -34,7 +34,7 @@ $(document).on("click", ".comment-btn", function(e){
                 }
               }).then((result => {
                   console.log(result)
-                  location.reload(true);
+                  location.reload();
     
               }));
 
@@ -56,6 +56,6 @@ $(document).on("click", ".delete-comment", function(e){
         url: "/comment/" + target,
     }).then((result) => {
         console.log(result);
-        location.reload();
+        location.reload(true);
     })
 });

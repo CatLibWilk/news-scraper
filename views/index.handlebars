@@ -10,10 +10,10 @@
   </div>
 </div>
 <div class="row">
-  <div id="articles-div" class="col-10 mx-auto bg-light p-3 mb-4">
-
+  <div id="articles-div" class="col-10 mx-auto p-3 mb-4">
+    <h1 class="text-center">What's ahead at Lightbox Film Center</h1>
     {{#each article}}
-      <div class="movie-div bg-white p-2 mb-2">
+      <div class="movie-div bg-light p-2 mb-3">
           <h2>{{headline}}</h2>
           <p>{{summary}}</p>
           <p>{{url}}</p>
@@ -21,12 +21,12 @@
           {{!-- {{#if article.comment}} --}}
           
           {{#each comment}}
-            <div class="comment-div bg-danger p-2 mt-2 mb-2">
+            <div class="comment-div p-2 mt-2 mb-4">
 
                   <h3 class="border-bottom">{{title}}</h3>
                   <p>{{body}}</p>
 
-                <button class="btn btn-danger delete-comment ml-auto" data-id={{_id}}>Delete</button>
+                <button class="btn btn-primary delete-comment ml-auto" data-id={{_id}}>Delete</button>
             </div>
           {{/each}}
           {{!-- {{/if}} --}}
@@ -37,8 +37,8 @@
 </div>
 
 <div class="row">
-  <div id="commentForm" class="col-8 mx-auto bg-light pd-3 mb-5 d-none">
-    <form>
+  <div id="commentForm" class="col-8 mx-auto bg-light p-3 mb-5 d-none">
+    <form class="">
       <div class="form-group">
         <label for="noteInput">Note Title</label>
         <input type="title" class="form-control" id="titleInput" aria-describedby="titleHelp" placeholder="Enter a title">
