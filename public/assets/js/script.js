@@ -17,7 +17,9 @@ $(document).on("click",".scrape-btn", (e) => {
 $(document).on("click", ".comment-btn", function(e){
     var targetId = $(this).attr("data-id");
     $("#commentForm").removeClass("d-none");
-    console.log(targetId);
+
+    
+    window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
 
     $("#sub-btn").on("click", function(e){
         e.preventDefault();
@@ -32,7 +34,8 @@ $(document).on("click", ".comment-btn", function(e){
                 }
               }).then((result => {
                   console.log(result)
-                  location.reload();
+                  location.reload(true);
+    
               }));
 
         }else{
@@ -44,7 +47,7 @@ $(document).on("click", ".comment-btn", function(e){
 
 $(document).on("click", ".delete-comment", function(e){
     var target = $(this).attr("data-id");
-    
+  
     $.ajax({
         headers: {
             "Content-Type": "application/json"
