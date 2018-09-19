@@ -39,7 +39,8 @@ $(document).on("click", ".comment-btn", function(e){
               }));
 
         }else{
-            console.log("Please provide a note title and comment to save.")
+            alertify.alert("Please provide a note title and comment to save.")
+                .set('frameless', true);
         };
 
     });
